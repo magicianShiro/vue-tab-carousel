@@ -7,12 +7,12 @@
 
 <script>
 import NaviTab from '@/components/Tab'
-import Scroll from '@/components/Scroll'
+// import Scroll from '@/components/Scroll'
 export default {
   name: 'app',
   components: {
-    NaviTab,
-    Scroll
+    NaviTab
+    // Scroll
   }
 }
 </script>

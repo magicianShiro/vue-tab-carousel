@@ -1,58 +1,6 @@
 <template>
   <div id="wrapper">
     <div id="scroller">
-      <!-- <ul>
-        <li>AlloyTouch</li>
-        <li>AlloyFinger - Super Tiny Size Gestures Library</li>
-        <li>Transformjs - Made CSS3 Super Easy</li>
-        <li>AlloyFlow - </li>
-        <li>Nuclear - Some HTML + Scoped CSS + JS </li>
-        <li>AlloyGameEngine</li>
-        <li>Rosin</li>
-        <li>LivePool</li>
-        <li>AlloyStick</li>
-        <li>CodeStar</li>
-        <li>AlloyDesigner</li>
-        <li>JXAnimate</li>
-        <li>Spirit</li>
-        <li>AlloyImage</li>
-        <li>ModJS</li>
-        <li>Pretty row 16</li>
-        <li>stepify</li>
-        <li>AlloyTimer</li>
-        <li>Alloy Desktop</li>
-        <li>JX UI</li>
-        <li>CodeTank</li>
-        <li>iSpriter</li>
-        <li>Rythem</li>
-        <li>Go!Png </li>
-        <li>JX</li>
-        <li>TEditor</li>
-        <li> row 1</li>
-        <li> row 2</li>
-        <li> row 3</li>
-        <li>row 5</li>
-        <li> row 5</li>
-        <li> row 7</li>
-        <li> row 8</li>
-        <li> row 9</li>
-        <li> row 11</li>
-        <li> row 11</li>
-        <li> row 12</li>
-        <li> row 13</li>
-        <li> row 14</li>
-        <li> row 15</li>
-        <li> row 16</li>
-        <li> row 17</li>
-        <li> row 18</li>
-        <li> row 19</li>
-        <li> row 20</li>
-        <li> row 21</li>
-        <li> row 22</li>
-        <li> row 23</li>
-        <li> row 24</li>
-        <li> row 25</li>
-      </ul> -->
       <slot></slot>
     </div>
   </div>
@@ -91,7 +39,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.init();
+      this.init()
     }, 20);
   },
   methods: {
@@ -136,7 +84,7 @@ export default {
       })
     },
     to (value, time ,ease) {
-      this.alloyTouch(value, time, ease)
+      this.alloyTouch.to(value, time, ease)
     },
     stop () {
       this.alloyTouch.stop()
@@ -147,16 +95,13 @@ export default {
 
 <style>
 #wrapper {
-  position: absolute;
+  /* position: absolute;
   z-index: 1;
   top: 45px;
   bottom: 48px;
-  /* top: 0; */
-  /* bottom: 0; */
   left: 0;
   width: 100%;
-  background: #ccc;
-  overflow: hidden;
+  overflow: hidden; */
 }
 #scroller {
   position: absolute;

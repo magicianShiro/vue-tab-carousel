@@ -1,0 +1,40 @@
+@mixin border ($direction) {
+  content: '';
+  position: absolute;
+  @if $direction == 'left' {
+    border-left: 1px solid #e6e6e6;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform-origin: 0 0;
+  } @else if $direction == 'bottom' {
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+    left: 0;
+    bottom: 0;
+    transform-origin: 0 bottom;
+  } @else if $direction == 'top' {
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+    left: 0;
+    top: 0;
+    transform-origin: 0 bottom;
+  }
+  
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    @if $direction == 'left' {
+      height: 200%;
+    } @else {
+      width: 200%;
+    }
+    transform: scale(.5);
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx) {
+    @if $direction == 'left' {
+      height: 300%;
+    } @else {
+      width: 300%;
+    }
+    transform: scale(.33);
+  }
+}
