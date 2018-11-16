@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import transform from '@/directives/transform'
+// import transform from '@/directives/transform'
 import '@/assets/styles/index.scss'
 
-Vue.directive('transform', transform)
+// Vue.directive('transform', transform)
 
 Vue.config.productionTip = false
 
