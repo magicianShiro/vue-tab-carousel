@@ -1,6 +1,6 @@
 <template>
-  <div id="wrapper">
-    <div id="scroller">
+  <div ref="scroll-wrpper" class="wrapper">
+    <div ref="scroller" class="scroller">
       <slot></slot>
     </div>
   </div>
@@ -11,6 +11,10 @@ import AlloyTouch from "alloytouch"
 import Transform from "alloytouch/transformjs"
 export default {
   props: {
+    touch: {
+      type: String,
+      default: '.wrapper'
+    },
     vertical: {
       type: Boolean,
       default: true
@@ -26,11 +30,19 @@ export default {
     max: {
       type: Number,
       default: 0
+    },
+    step: {
+      type: Number,
+      default: 0
+    },
+    inertia: {
+      type: Boolean,
+      default: true
+    },
+    touchEndReturn: {
+      type: [String, Boolean],
+      default: ''
     }
-    // step: {
-    //   type: Number,
-    //   default: 40
-    // }
   },
   data () {
     return {
@@ -45,21 +57,23 @@ export default {
   methods: {
     init() {
       let _this = this
-      let target = document.querySelector("#scroller");
+      // let target = document.querySelector("#scroller");
+      let target = this.$refs.scroller
       //给element注入transform属性
       Transform(target, true);
       this.alloyTouch = new AlloyTouch({
-        touch: "#wrapper", //反馈触摸的dom
-        vertical: _this.vertical, //不必需，默认是true代表监听竖直方向touch
+        touch: this.touch, //反馈触摸的dom
+        vertical: this.vertical, //不必需，默认是true代表监听竖直方向touch
         target: target, //运动的对象
         property: this.property, //被滚动的属性
         sensitivity: 1, //不必需,触摸区域的灵敏度，默认值为1，可以为负数
         factor: 1, //不必需,默认值是1代表touch区域的1px的对应target.y的1
         min: this.min, //不必需,滚动属性的最小值
         max: this.max, //不必需,滚动属性的最大值
-        // step: this.step,
+        step: this.step === 0 ? undefined : this.step,
+        spring: true, //不必需,是否有回弹效果。默认是true
+        inertia: this.inertia,
         animationEnd: function(value) {
-          // console.log(value);
           _this.$emit('animationEnd', value)
         },
         pressMove: function(evt, value) {
@@ -75,15 +89,16 @@ export default {
         touchMove: function (evt, value) {
           _this.$emit('touchMove', evt, value)
         },
-        toucheEnd: function (evt, value) {
-          _this.$emit('touchEnd', evt, value)
+        touchEnd: function (evt, value, index) {
+          _this.$emit('touchEnd', evt, value, index)
+          return typeof _this.touchEndReturn === 'boolean' ? _this.touchEndReturn : undefined
         },
         tap: function (evt, value) {
           _this.$emit('tap', evt ,value)
         }
       })
     },
-    to (value, time ,ease) {
+    to (value, time, ease) {
       this.alloyTouch.to(value, time, ease)
     },
     stop () {
@@ -102,6 +117,7 @@ export default {
   left: 0;
   width: 100%;
   overflow: hidden; */
+  height: 100%;
 }
 #scroller {
   position: absolute;

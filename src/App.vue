@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <navi-tab />
-    <!-- <scroll /> -->
+    <navi-tab-carousel></navi-tab-carousel>
   </div>
 </template>
 
 <script>
-import NaviTab from '@/components/Tab'
+import NaviTabCarousel from '@/components/TabCarousel'
 // import Scroll from '@/components/Scroll'
 export default {
   name: 'app',
   components: {
-    NaviTab
-    // Scroll
+    NaviTabCarousel
   }
 }
 </script>

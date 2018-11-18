@@ -2,6 +2,7 @@
   <div class="navi-tab">
     <navi-scroll
       ref="naviScroll"
+      touch=".navi-tab"
       :vertical="false"
       property="translateX"
       :min="min">
@@ -10,7 +11,7 @@
           <li
             v-for="(tab, index) in tabList"
             :key="index"
-            @click="tabClick($event, index)"
+            @click="tabClick(index)"
             :class="{ 'navi-tab__item--active': index === activeIndex }" 
             class="navi-tab__item">{{ tab }}</li>
         </ul>
@@ -28,6 +29,12 @@
 <script>
   import NaviScroll from '@/components/Scroll/index.vue'
   export default {
+    props: {
+      activeIndex: {
+        type: Number,
+        default: 0
+      }
+    },
     components: {
       NaviScroll
     },
@@ -36,8 +43,12 @@
         tabList: ['标签1','标签2','标签3','标签4','我是标签5','标签6','标签7','标签8','标签9','标签10'],
         ulWidth: 0,
         min: 0,
-        activeIndex: 0,
         transition: 'transform .3s'
+      }
+    },
+    watch: {
+      activeIndex (val) {
+        this.tabClick(val)
       }
     },
     methods: {
@@ -53,38 +64,43 @@
         this.$refs.tabList.style.width=ulWidth + 'px'
         this.min = -ulWidth + window.innerWidth
       },
-      tabClick (evt, index) {
-        this.activeIndex = index
-        let liEl = evt.target
-        let liMarginLeft = parseInt(window.getComputedStyle(liEl, null)['margin-right'])
-        let liWidth = liEl.offsetWidth
-        let liOfferLeft = liEl.offsetLeft - liMarginLeft
-        let viewPortWidth = window.innerWidth
-        let centerX = (viewPortWidth - liWidth) / 2
-        let moveMax = this.ulWidth - viewPortWidth
-        let move = liOfferLeft - centerX
-        let lineWidth = this.$refs.line.offsetWidth
-        let lineToLi = (liWidth - lineWidth) / 2
-        let liToLeft = centerX + liMarginLeft + move + lineToLi
-        if (move < 0) {
-          move = 0
-          liToLeft = liEl.offsetLeft + lineToLi
-        }
-        if (move > moveMax) {
-          move = moveMax
-          liToLeft = liEl.offsetLeft + lineToLi
-        }
-        let time = 300
-        // if (move < 30) {
-        //   time = 100
-        //   this.transition = 'transform .1s'
-        // }
-        // else {
-        //   time = 600
-        //   this.transition = 'transform .6s'
-        // }
-        this.$refs.naviScroll.to(-move, time)
-        this.$refs.line.style.transform = `translateX(${liToLeft}px)`
+      tabClick (index) {
+        // this.activeIndex = index
+        this.$emit('update:activeIndex', index)
+        this.$nextTick(() => {
+          let liEl = document.querySelector('.navi-tab .navi-tab__item--active')
+          // let liEl = evt.target
+          let liMarginLeft = parseInt(window.getComputedStyle(liEl, null)['margin-right'])
+          let liWidth = liEl.offsetWidth
+          let liOfferLeft = liEl.offsetLeft - liMarginLeft
+          let viewPortWidth = window.innerWidth
+          let centerX = (viewPortWidth - liWidth) / 2
+          let moveMax = this.ulWidth - viewPortWidth
+          let move = liOfferLeft - centerX
+          let lineWidth = this.$refs.line.offsetWidth
+          let lineToLi = (liWidth - lineWidth) / 2
+          let liToLeft = centerX + liMarginLeft + move + lineToLi
+          if (move < 0) {
+            move = 0
+            liToLeft = liEl.offsetLeft + lineToLi
+          }
+          if (move > moveMax) {
+            move = moveMax
+            liToLeft = liEl.offsetLeft + lineToLi
+          }
+          let time = 300
+          // if (move < 30) {
+          //   time = 100
+          //   this.transition = 'transform .1s'
+          // }
+          // else {
+          //   time = 600
+          //   this.transition = 'transform .6s'
+          // }
+          this.$refs.naviScroll.to(-move, time)
+          this.$refs.line.style.transform = `translateX(${liToLeft}px)`
+        }) 
+        
       }
     },
     mounted () {
@@ -99,14 +115,13 @@
 @import '~@/assets/styles/_mixin.scss';
 .navi-tab {
   font-size: 20px;
-  &__wrap {
+  height: 43px;
+  &__list {
     position: relative;
+    overflow: hidden;
     &::after {
       @include border(bottom)
     }
-  }
-  &__list {
-    overflow: hidden;
   }
   &__item {
     min-width: 60px;
