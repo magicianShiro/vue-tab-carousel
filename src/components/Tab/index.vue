@@ -115,7 +115,8 @@
 @import '~@/assets/styles/_mixin.scss';
 .navi-tab {
   font-size: 20px;
-  height: 43px;
+  // height: 43px;
+  height: 44px;
   &__list {
     position: relative;
     overflow: hidden;

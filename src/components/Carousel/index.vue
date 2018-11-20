@@ -10,36 +10,18 @@
       :inertia="false"
       :touchEndReturn="false"
       @touchEnd="touchEnd">
-      <div style="width: 1000%;" class="navi-carousel__list">
-        <div class="navi-carousel__item">
-          <navi-scroll
-            touch=".navi-carousel__item"
-            :min="-400">
-              <ul>
-                <li>AlloyTouch</li>
-                <li>AlloyFinger - Super Tiny Size Gestures Library</li>
-                <li>Transformjs - Made CSS3 Super Easy</li>
-                <li>AlloyFlow - </li>
-                <li>Nuclear - Some HTML + Scoped CSS + JS </li>
-                <li>AlloyGameEngine</li>
-                <li>Rosin</li>
-                <li>LivePool</li>
-                <li>AlloyStick</li>
-                <li>CodeStar</li>
-                <li>AlloyDesigner</li>
-                <li>JXAnimate</li>
-                <li>Spirit</li>
-                <li>AlloyImage</li>
-                <li>ModJS</li>
-                <li>Pretty row 16</li>
-                <li>stepify</li>
-                <li>AlloyTimer</li>
-                <li>Alloy Desktop</li>
-                <li>JX UI</li>
-            </ul>
-          </navi-scroll>
-        </div>
-        <div class="navi-carousel__item">2</div>
+      <div ref="carouselList" class="navi-carousel__list">
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <navi-carousel-item />
+        <!-- <div class="navi-carousel__item">2</div>
         <div class="navi-carousel__item">3</div>
         <div class="navi-carousel__item">4</div>
         <div class="navi-carousel__item">5</div>
@@ -47,7 +29,7 @@
         <div class="navi-carousel__item">7</div>
         <div class="navi-carousel__item">8</div>
         <div class="navi-carousel__item">9</div>
-        <div class="navi-carousel__item">10</div>
+        <div class="navi-carousel__item">10</div> -->
       </div>
     </navi-scroll>
   </div>
@@ -55,6 +37,7 @@
 
 <script>
 import NaviScroll from '@/components/Scroll/index.vue'
+import NaviCarouselItem from '@/components/CarouselItem/index.vue'
 export default {
   props: {
     activeIndex: {
@@ -63,7 +46,8 @@ export default {
     }
   },
   components: {
-    NaviScroll
+    NaviScroll,
+    NaviCarouselItem
   },
   data () {
     return {
@@ -84,7 +68,14 @@ export default {
   methods: {
     calculated () {
       this.step = window.innerWidth
-      this.min = -window.innerWidth * (document.querySelectorAll('.navi-carousel__item').length - 1)
+      this.min = -window.innerWidth * (document.querySelectorAll('.navi-carousel-item').length - 1)
+      this.$nextTick(() => {
+        let carouselListEl = this.$refs.carouselList
+        carouselListEl.style.width = carouselListEl.childNodes.length * 100 + '%'
+        carouselListEl.childNodes.forEach(item => {
+          item.style.width = (100 / carouselListEl.childNodes.length) + '%'
+        })
+      })
     },
     touchEnd (evt, v, index) {
       var step_v = index * this.step * -1;
@@ -97,33 +88,13 @@ export default {
         this.$refs.naviScroll.to(step_v, 100);
       }
       else if (dx > 0) {
-        this.$refs.naviScroll.to(step_v + this.step, 300);
+        this.$refs.naviScroll.to(step_v + this.step, 100);
         this.$emit('update:activeIndex', this.activeIndex - 1)
       } else {
-        this.$refs.naviScroll.to(step_v - this.step, 300);
+        this.$refs.naviScroll.to(step_v - this.step, 100);
         this.$emit('update:activeIndex', this.activeIndex + 1)
       }
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.navi-carousel {
-  &__item {
-    display: inline-block;
-    // width: 100%;
-    width: 10%;
-    height: 400px;
-    background-color: #eee;
-    overflow: hidden;
-    li {
-      height: 40px;
-      line-height: 40px;
-      font-size: 12px;
-      background-color: #fafafa;
-      border-bottom: 1px solid #eee;
-    }
-  }
-}
-</style>

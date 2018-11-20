@@ -12,7 +12,7 @@ import Transform from "alloytouch/transformjs"
 export default {
   props: {
     touch: {
-      type: String,
+      type: [String, HTMLDivElement],
       default: '.wrapper'
     },
     vertical: {
@@ -42,6 +42,10 @@ export default {
     touchEndReturn: {
       type: [String, Boolean],
       default: ''
+    },
+    spring: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -53,6 +57,13 @@ export default {
     setTimeout(() => {
       this.init()
     }, 20);
+  },
+  watch: {
+    min (val) {
+      if (this.alloyTouch && val) {
+        this.alloyTouch.min = val
+      }
+    }
   },
   methods: {
     init() {
@@ -71,8 +82,9 @@ export default {
         min: this.min, //不必需,滚动属性的最小值
         max: this.max, //不必需,滚动属性的最大值
         step: this.step === 0 ? undefined : this.step,
-        spring: true, //不必需,是否有回弹效果。默认是true
+        spring: this.spring, //不必需,是否有回弹效果。默认是true
         inertia: this.inertia,
+        maxSpeed: 2,
         animationEnd: function(value) {
           _this.$emit('animationEnd', value)
         },
@@ -90,7 +102,7 @@ export default {
           _this.$emit('touchMove', evt, value)
         },
         touchEnd: function (evt, value, index) {
-          _this.$emit('touchEnd', evt, value, index)
+          let a = _this.$emit('touchEnd', evt, value, index)
           return typeof _this.touchEndReturn === 'boolean' ? _this.touchEndReturn : undefined
         },
         tap: function (evt, value) {
