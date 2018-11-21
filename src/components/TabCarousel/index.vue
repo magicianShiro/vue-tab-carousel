@@ -9,7 +9,7 @@
 import NaviTab from '@/components/Tab'
 import NaviCarousel from '@/components/Carousel'
 export default {
-  name: 'app',
+  name: 'NaviTabCarousel',
   components: {
     NaviTab,
     NaviCarousel

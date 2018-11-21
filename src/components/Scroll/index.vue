@@ -10,6 +10,7 @@
 import AlloyTouch from "alloytouch"
 import Transform from "alloytouch/transformjs"
 export default {
+  name: 'NaviScroll',
   props: {
     touch: {
       type: [String, HTMLDivElement],
@@ -43,13 +44,18 @@ export default {
       type: [String, Boolean],
       default: ''
     },
-    spring: {
-      type: Boolean,
-      default: true
+    // spring: {
+    //   type: Boolean,
+    //   default: true
+    // },
+    initialValue: {
+      type: Number,
+      default: 0
     }
   },
   data () {
     return {
+      target: null,
       alloyTouch: null
     }
   },
@@ -69,22 +75,23 @@ export default {
     init() {
       let _this = this
       // let target = document.querySelector("#scroller");
-      let target = this.$refs.scroller
+      this.target = this.$refs.scroller
       //给element注入transform属性
-      Transform(target, true);
+      Transform(this.target, true);
       this.alloyTouch = new AlloyTouch({
         touch: this.touch, //反馈触摸的dom
         vertical: this.vertical, //不必需，默认是true代表监听竖直方向touch
-        target: target, //运动的对象
+        target: this.target, //运动的对象
         property: this.property, //被滚动的属性
         sensitivity: 1, //不必需,触摸区域的灵敏度，默认值为1，可以为负数
         factor: 1, //不必需,默认值是1代表touch区域的1px的对应target.y的1
         min: this.min, //不必需,滚动属性的最小值
         max: this.max, //不必需,滚动属性的最大值
         step: this.step === 0 ? undefined : this.step,
-        spring: this.spring, //不必需,是否有回弹效果。默认是true
+        // spring: this.spring, //不必需,是否有回弹效果。默认是true
         inertia: this.inertia,
         maxSpeed: 2,
+        // initialValue: 0,
         animationEnd: function(value) {
           _this.$emit('animationEnd', value)
         },
@@ -102,13 +109,14 @@ export default {
           _this.$emit('touchMove', evt, value)
         },
         touchEnd: function (evt, value, index) {
-          let a = _this.$emit('touchEnd', evt, value, index)
+          _this.$emit('touchEnd', evt, value, index)
           return typeof _this.touchEndReturn === 'boolean' ? _this.touchEndReturn : undefined
         },
         tap: function (evt, value) {
           _this.$emit('tap', evt ,value)
         }
       })
+      this.$emit('initSuccess')
     },
     to (value, time, ease) {
       this.alloyTouch.to(value, time, ease)

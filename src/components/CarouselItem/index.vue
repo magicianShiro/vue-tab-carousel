@@ -22,6 +22,7 @@
 <script>
   import NaviScroll from '@/components/Scroll/index.vue'
   export default {
+    name: 'NaviScrollItem',
     components: {
       NaviScroll
     },
