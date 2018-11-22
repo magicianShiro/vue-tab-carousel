@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <tab />
-    <!-- <carousel /> -->
+    <carousel />
     <load-more />
   </div>
 </template>

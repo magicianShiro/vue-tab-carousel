@@ -126,14 +126,14 @@
 <style lang="scss" scoped>
 @import '~@/assets/styles/_mixin.scss';
 .navi-tab {
+  position: relative;
   font-size: 20px;
   height: 44px;
+  &::after {
+    @include border(bottom)
+  }
   &__list {
-    position: relative;
     overflow: hidden;
-    &::after {
-      @include border(bottom)
-    }
   }
   &__item {
     min-width: 60px;
