@@ -55,12 +55,13 @@ export default {
   methods: {
     calculated () {
       this.step = window.innerWidth
- 
       let carouselListEl = this.$refs.carouselList
+      if (carouselListEl.childNodes.length === 0) return
       this.min = -window.innerWidth * (carouselListEl.childNodes.length - 1)
       carouselListEl.style.width = carouselListEl.childNodes.length * 100 + '%'
       carouselListEl.childNodes.forEach(item => {
         item.style.width = (100 / carouselListEl.childNodes.length) + '%'
+        item.style.display = "inline-block"
       })
     },
     initSuccess () {

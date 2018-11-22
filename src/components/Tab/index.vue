@@ -42,6 +42,7 @@
         default: 0
       },
       tabList: {
+        required: true,
         type: Array,
         default: () => []
       }
@@ -59,6 +60,11 @@
     watch: {
       activeIndex (val) {
         this.tabClick(val)
+      },
+      tabList (val) {
+        this.$nextTick(() => {
+          this.calculatedWidth()
+        })
       }
     },
     methods: {
@@ -116,6 +122,7 @@
       }
     },
     mounted () {
+      if (this.tabList.length === 0) return
       this.$nextTick(() => {
         this.calculatedWidth()
       })

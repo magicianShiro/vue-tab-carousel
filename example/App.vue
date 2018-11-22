@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <tab />
-    <carousel />
-    <load-more />
+    <!-- <tab /> -->
+    <!-- <carousel /> -->
+    <!-- <load-more /> -->
+    <tab-carousel />
   </div>
 </template>
 
@@ -11,12 +12,14 @@
 import Tab from 'example/components/Tab'
 import Carousel from 'example/components/Carousel'
 import LoadMore from 'example/components/LoadMore'
+import TabCarousel from 'example/components/TabCarousel'
 export default {
   name: 'app',
   components: {
     Tab,
-    Carousel,
-    LoadMore
+    // Carousel,
+    // LoadMore,
+    TabCarousel
   },
   data () {
     return {

@@ -4,6 +4,7 @@ import Carousel from './components/Carousel'
 // import CarouselItem from './components/CarouselItem'
 import LoadMore from './components/LoadMore'
 import TabCarousel from './components/TabCarousel'
+import TabCarouselItem from './components/TabCarouselItem'
 import './assets/styles/index.scss'
 
 const components = [
@@ -12,7 +13,8 @@ const components = [
   Carousel,
   LoadMore,
   // CarouselItem,
-  TabCarousel
+  TabCarousel,
+  TabCarouselItem
 ]
 
 const install = function (Vue) {
@@ -31,7 +33,8 @@ export {
   Carousel,
   LoadMore,
   // CarouselItem,
-  TabCarousel
+  TabCarousel,
+  TabCarouselItem
 }
 
 export default {
@@ -41,5 +44,6 @@ export default {
   Carousel,
   LoadMore,
   // CarouselItem,
-  TabCarousel
+  TabCarousel,
+  TabCarouselItem
 }

@@ -1,4 +1,5 @@
 <template>
+  <!-- 没用了 换成了loadMore -->
   <div ref="carouselItem" class="navi-carousel-item">
     <navi-scroll
       ref="naviScroll"
