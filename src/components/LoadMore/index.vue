@@ -2,8 +2,7 @@
   <div
     ref="loadMore"
     class="navi-load-more"
-    :style="{ height: height + 'px' }">
-    
+    :style="{ height: actualHeight() + 'px' }">
     <div v-if="showLoading" class="loading-icon">
       <img :src="require('@/assets/loading.svg')">
     </div>
@@ -38,11 +37,14 @@
     components: {
       NaviScroll
     },
+    inject: {
+      tabCarousel: { default: () => ({ height: 0 }) }
+    },
     props: {
       height: {
-        required: true,
+        // required: true,
         type: Number,
-        default: 0
+        default: 400
       },
       refresh: {
         type: Boolean,
@@ -80,9 +82,10 @@
             setTimeout(() => {
               this.showArrow = true
             }, 300)
+            this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.actualHeight()
+          } else {
+            this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.actualHeight() + this.arrowHeight
           }
-          // 获取箭头区域的
-          this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.height + this.arrowHeight
         })
       },
       touchMove (evt, value) {
@@ -108,6 +111,9 @@
           this.behavior = 'infinite'
           this.touchEndReturn = true
         }
+      },
+      actualHeight () {
+        return this.tabCarousel.height ? this.tabCarousel.height : this.height
       }
     }
   }

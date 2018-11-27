@@ -25,20 +25,37 @@ export default {
     activeIndex: {
       type: Number,
       default: 0
+    },
+    contentHeight: {
+      type: Number,
+      default: 0
     }
     // tabList: {
     //   type: Array,
     //   default: () => []
     // }
   },
+  provide () {
+    return {
+      tabCarousel: this.props
+    }
+  },
   components: {
     NaviTab,
     NaviCarousel
   },
+  watch: {
+    contentHeight (val) {
+      this.props.height = val
+    }
+  },
   data () {
     return {
       tabList: [],
-      active: 0
+      active: 0,
+      props: {
+        height: this.contentHeight
+      }
     }
   },
   mounted () {

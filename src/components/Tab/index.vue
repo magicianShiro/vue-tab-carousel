@@ -7,7 +7,10 @@
       property="translateX"
       :min="min">
       <div class="navi-tab__wrap">
-        <ul ref="tabList" class="navi-tab__list">
+        <ul
+          :class="{ 'navi-tab__list--flex': tabList.length <= 4 }"
+          ref="tabList"
+          class="navi-tab__list">
           <li
             v-for="(tab, index) in tabList"
             :key="index"
@@ -69,6 +72,7 @@
     },
     methods: {
       calculatedWidth () {
+        // if (this.tabList.length <=4 ) return
         let ulWidth = Array.from(document.querySelectorAll('.navi-tab__item')).reduce((outWidth, liEl) => {
           let marginLeft = parseInt(window.getComputedStyle(liEl, null)['margin-left'])
           let marginRight = parseInt(window.getComputedStyle(liEl, null)['margin-right'])
@@ -141,11 +145,16 @@
   }
   &__list {
     overflow: hidden;
+    &--flex {
+      display: flex;
+    }
   }
   &__item {
-    min-width: 60px;
-    margin: 0 10px;
-    padding: 12px 8px;
+    flex: 1;
+    // min-width: 60px;
+    min-width: 90px;
+    // margin: 0 10px;
+    padding: 12px 18px;
     float: left;
     font-size: 14px;
     text-align: center;
