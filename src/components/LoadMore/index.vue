@@ -85,6 +85,9 @@
             this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.actualHeight()
           } else {
             this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.actualHeight() + this.arrowHeight
+            if (this.min > 0) this.min = 0
+            // console.log(parseInt(getComputedStyle(this.$refs.scrollContent).height))
+            // if (this.min < this.actualHeight) this.min = -this.actualHeight + 1
           }
         })
       },

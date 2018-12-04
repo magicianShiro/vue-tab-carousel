@@ -29,15 +29,16 @@ export default {
     contentHeight: {
       type: Number,
       default: 0
+    },
+    skeleton: {
+      type: Boolean,
+      default: true
     }
-    // tabList: {
-    //   type: Array,
-    //   default: () => []
-    // }
   },
   provide () {
     return {
-      tabCarousel: this.props
+      tabCarousel: this.props,
+      skeleton: this.skeleton
     }
   },
   components: {
@@ -47,6 +48,15 @@ export default {
   watch: {
     contentHeight (val) {
       this.props.height = val
+    },
+    activeIndex: {
+      handler (val) {
+        this.$nextTick(() => {
+          let component =this.$slots.default[val].child
+          component.active()
+        })
+      },
+      immediate: true
     }
   },
   data () {
@@ -60,7 +70,8 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      let children = this.$refs.naviCarousel.$slots.default
+      // let children = this.$refs.naviCarousel.$slots.default
+      let children = this.$slots.default
       let tags = children.map(v => v.child.tag)
       this.tabList = tags
     })

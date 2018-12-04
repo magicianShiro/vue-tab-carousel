@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <tab />
+    <!-- <tab /> -->
     <!-- <carousel /> -->
     <!-- <load-more /> -->
-    <!-- <tab-carousel /> -->
+    <tab-carousel />
   </div>
 </template>
 
