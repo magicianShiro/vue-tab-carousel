@@ -64,7 +64,7 @@
       activeIndex (val) {
         this.tabClick(val)
       },
-      tabList (val) {
+      tabList () {
         this.$nextTick(() => {
           this.calculatedWidth()
         })
