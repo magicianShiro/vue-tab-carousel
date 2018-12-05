@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import NaviScroll from '@/components/Scroll/index.vue'
+import NaviScroll from 'package/Scroll/index.js'
 // import NaviCarouselItem from '@/components/CarouselItem/index.vue'
 export default {
   name: 'NaviCarousel',

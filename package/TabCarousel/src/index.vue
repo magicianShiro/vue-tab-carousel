@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import NaviTab from '@/components/Tab'
-import NaviCarousel from '@/components/Carousel'
+import NaviTab from 'package/Tab/index.js'
+import NaviCarousel from 'package/Carousel/index.js'
 export default {
   name: 'NaviTabCarousel',
   model: {

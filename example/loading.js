@@ -90,7 +90,7 @@ class Loading {
     this.loadingEl.style.fill = this.color
     this.show()
   }
-  close() {
+  close () {
     this.hide()
   }
 }
@@ -99,7 +99,7 @@ let loading
 function fun (options) {
   Loading.zIndex++
   loading = new Loading(options || {})
-  return loading 
+  return loading
 }
 
 Vue.prototype.$loading = fun()

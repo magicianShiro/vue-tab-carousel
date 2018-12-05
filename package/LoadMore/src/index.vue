@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import NaviScroll from '@/components/Scroll/index.vue'
+  import NaviScroll from 'package/Scroll/index.js'
   export default {
     name: 'NaviLoadMore',
     components: {
@@ -42,7 +42,6 @@
     },
     props: {
       height: {
-        // required: true,
         type: Number,
         default: 400
       },

@@ -8,9 +8,13 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('example', resolve('example'))
+      .set('package', resolve('package'))
     // 扩展 webpack 配置，使 packages 加入编译
     config.module
       .rule('js')
+      .include
+        .add(/src/)
+        .end()
       .use('babel')
         .loader('babel-loader')
         .tap(options => {
