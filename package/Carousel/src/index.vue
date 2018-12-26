@@ -30,6 +30,10 @@ export default {
     activeIndex: {
       type: Number,
       default: 0
+    },
+    animationTime: {
+      type: Number,
+      default: 300
     }
   },
   components: {
@@ -49,7 +53,7 @@ export default {
   },
   watch: {
     activeIndex (val) {
-      this.$refs.naviScroll.to(-this.step * val);
+      this.$refs.naviScroll.to(-this.step * val, this.animationTime);
     }
   },
   methods: {
@@ -71,18 +75,18 @@ export default {
       var step_v = index * this.step * -1;
       var dx = v - step_v;
       if (v < this.min) {
-        this.$refs.naviScroll.to(this.min, 300);
+        this.$refs.naviScroll.to(this.min, this.animationTime);
       } else if (v > this.max) {
-        this.$refs.naviScroll.to(this.max, 300);
+        this.$refs.naviScroll.to(this.max, this.animationTime);
       } else if (Math.abs(dx) < 30) {
-        this.$refs.naviScroll.to(step_v, 300);
+        this.$refs.naviScroll.to(step_v, this.animationTime);
       }
       else if (dx > 0) {
-        this.$refs.naviScroll.to(step_v + this.step, 300);
+        // this.$refs.naviScroll.to(step_v + this.step, this.animationTime);
         this.$emit('input', this.activeIndex - 1)
         // this.$emit('update:activeIndex', this.activeIndex - 1)
       } else {
-        this.$refs.naviScroll.to(step_v - this.step, 300);
+        // this.$refs.naviScroll.to(step_v - this.step, this.animationTime);
         // this.$emit('update:activeIndex', this.activeIndex + 1)
         this.$emit('input', this.activeIndex + 1)
       }
