@@ -1,14 +1,16 @@
 <template>
-  <div class="navi-tab">
+  <div
+    ref="naviTab"
+    class="navi-tab">
     <navi-scroll
       ref="naviScroll"
-      touch=".navi-tab"
+      :touch="touch"
       :vertical="false"
       property="translateX"
       :min="min">
       <div class="navi-tab__wrap">
+        <!-- :class="{ 'navi-tab__list--flex': tabList.length <= 4 }" -->
         <ul
-          :class="{ 'navi-tab__list--flex': tabList.length <= 4 }"
           ref="tabList"
           class="navi-tab__list">
           <li
@@ -57,12 +59,13 @@
       return {
         ulWidth: 0,
         min: 0,
-        transition: null
+        transition: null,
+        touch: null
       }
     },
     watch: {
       activeIndex (val) {
-        this.tabClick(val)
+        this.tabMove(val)
       },
       tabList () {
         this.$nextTick(() => {
@@ -70,25 +73,43 @@
         })
       }
     },
+    mounted () {
+      this.touch = this.$refs.naviTab
+      if (this.tabList.length === 0) return
+      this.$nextTick(() => {
+        this.calculatedWidth()
+      })
+    },
     methods: {
       calculatedWidth () {
         // if (this.tabList.length <=4 ) return
-        let ulWidth = Array.from(document.querySelectorAll('.navi-tab__item')).reduce((outWidth, liEl) => {
+        let ulWidth = Array.from(this.touch.querySelectorAll('.navi-tab__item')).reduce((outWidth, liEl) => {
           let marginLeft = parseInt(window.getComputedStyle(liEl, null)['margin-left'])
           let marginRight = parseInt(window.getComputedStyle(liEl, null)['margin-right'])
-          let width = liEl.offsetWidth
+          let width = parseFloat(window.getComputedStyle(liEl, null)['width'])
           outWidth += marginLeft + marginRight + width
           return outWidth
         }, 0)
-        this.ulWidth = ulWidth
-        this.$refs.tabList.style.width=ulWidth + 'px'
-        this.min = -ulWidth + window.innerWidth
+        ulWidth = Math.ceil(ulWidth)
+        let ulEl = this.$refs.tabList
+        if (ulWidth < window.innerWidth) {
+          this.min = 0
+          this.ulWidth = window.innerWidth
+          ulEl.classList.add('navi-tab__list--flex')
+          ulEl.style.width = window.innerWidth + 'px'
+        } else {
+          this.min = -ulWidth + window.innerWidth
+          this.ulWidth = ulWidth
+          ulEl.style.width=ulWidth + 'px'
+        }
         let { lineMove } = this.getMove()
         this.$refs.line.style.transform = `translateX(${lineMove}px)`
       },
       tabClick (index) {
         if (!this.transition) this.transition = 'transform .3s'
         this.$emit('input', index)
+      },
+      tabMove () {
         this.$nextTick(() => {
           let { wrapMove, lineMove } = this.getMove()
           let time = 300
@@ -97,7 +118,7 @@
         }) 
       },
       getMove () {
-        let liEl = document.querySelector('.navi-tab .navi-tab__item--active')
+        let liEl = this.touch.querySelector('.navi-tab .navi-tab__item--active')
         let liMarginLeft = parseInt(window.getComputedStyle(liEl, null)['margin-right'])
         let liWidth = liEl.offsetWidth
         let liOfferLeft = liEl.offsetLeft - liMarginLeft
@@ -108,6 +129,7 @@
         let lineWidth = this.$refs.line.offsetWidth
         let lineToLi = (liWidth - lineWidth) / 2
         let liToLeft = centerX + liMarginLeft + move + lineToLi
+        // console.log(move)
         if (move < 0) {
           move = 0
           liToLeft = liEl.offsetLeft + lineToLi
@@ -124,12 +146,6 @@
         // this.$refs.naviScroll.to(-move, time)
         // this.$refs.line.style.transform = `translateX(${liToLeft}px)`
       }
-    },
-    mounted () {
-      if (this.tabList.length === 0) return
-      this.$nextTick(() => {
-        this.calculatedWidth()
-      })
     }
   }
 </script>
@@ -158,6 +174,7 @@
     float: left;
     font-size: 14px;
     text-align: center;
+    line-height: 20px;
     &--active {
       color: #f60;
     }
