@@ -4,6 +4,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+  baseUrl: process.env.NODE_ENV === 'production' ? '/vue-tab-carousel/' : '/',
   css: { extract: false },
   chainWebpack: config => {
     config.resolve.alias
