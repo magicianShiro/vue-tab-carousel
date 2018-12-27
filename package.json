@@ -1,5 +1,5 @@
 {
-  "name": "tab-carousel",
+  "name": "vue-tab-carousel",
   "version": "1.0.0",
   "description": "一个集成了tab,carousel,loadmore的移动端vue组件",
   "keywords": [
