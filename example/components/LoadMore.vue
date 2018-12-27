@@ -20,7 +20,6 @@
         <div class="loading-more" style="display: block; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">正在加载中，请稍后...</div>
       </div>
     </div>
-    
   </navi-load-more>
 </template>
 

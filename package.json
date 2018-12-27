@@ -1,7 +1,18 @@
 {
   "name": "tab-carousel",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "一个集成了tab,carousel,loadmore的移动端vue组件",
+  "keywords": [
+    "tab",
+    "carousel",
+    "loadmore",
+    "refresh",
+    "tab-carousel",
+    "vue",
+    "vue-tab-carousel"
+  ],
+  "main": "./lib/vueTabCarousel.umd.js",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js",
     "build:lib": "vue-cli-service build --target lib --name vueTabCarousel --dest lib src/index.js",

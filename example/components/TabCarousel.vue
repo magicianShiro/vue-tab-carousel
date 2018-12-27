@@ -1,8 +1,6 @@
 <template>
   <div class="tab-carousel">
     <navi-tab-carousel
-      :content-height="400"
-      :skeleton="true"
       v-model="activeIndex">
       <navi-tab-carousel-item tag="标签1">
         <load-more></load-more>
