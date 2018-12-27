@@ -30,7 +30,7 @@ export default {
 </script>
 ```
 ### 属性
-|参数|说明|类型|可选值|是否必填|默认值|
+|参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |tab-list|标签名|Array||true||
 
@@ -68,7 +68,7 @@ export default {
 ```
 
 ### 属性
-|参数|说明|类型|可选值|是否必填|默认值|
+|参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |animation-time|过渡时间|Number||false|300|
 
@@ -87,19 +87,19 @@ export default {
 </template>
 ```
 ### 属性
-|参数|说明|类型|可选值|是否必填|默认值|
+|参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |height|滑动视口的高度|Number||true|400|
 |refresh|是否开启下拉刷新|Boolean|true/false|false|false|
 
 ### 事件
-|时间名称|说明|回调参数|
+|事件名称|说明|回调参数|
 |--|--|--|
 |loadMore|滑动到底部的时候触发|-|
 |refresh|下拉刷新的时候触发(refresh参数为true才有效)|-|
 
 ## tabCarousel组件
-> 注意: `navi-tab-carousel-item` 组件中可以嵌套`load-more`组件, 此时 `load-more` 组件不需要设置`height`属性, `content-height`属性会将其所有的高度统一化
+> 注意: `navi-tab-carousel-item` 组件中可以嵌套`load-more`组件, 此时 `load-more` 组件不需要设置`height`属性, `content-height`属性会将其所有的高度统一化
 ```vue
 <template>
   <navi-tab-carousel
@@ -119,12 +119,12 @@ export default {
 </template>
 ```
 ### 属性
-|参数|说明|类型|可选值|是否必填|默认值|
+|参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |content-height|滑动视口的高度|Number||true|400|
 |skeleton|是否开启骨架屏占位(主要是为了懒加载)|Boolean|true/false|true|true|
 
 ### 子组件属性
-|参数|说明|类型|可选值|是否必填|默认值|
+|参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |tag|最终会统一作为tab的名称|string||true|-|
