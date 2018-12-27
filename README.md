@@ -22,7 +22,7 @@ Vue.use(TabCarousel)
 export default {
   data () {
     return {
-      list1: ['标签1', '标签2', '标签3'],
+      list1: ['标签1', '标签2', '标签3'],
       activeIndex1: 0,
     }
   }
