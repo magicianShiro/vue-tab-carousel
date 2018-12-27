@@ -16,7 +16,7 @@
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js",
     "build:lib": "vue-cli-service build --target lib --name vueTabCarousel --dest lib src/index.js",
-    "build": "vue-cli-service build ./src/index.js",
+    "build": "vue-cli-service build ./example/main.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
