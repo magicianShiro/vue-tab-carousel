@@ -1,7 +1,11 @@
 {
   "name": "vue-tab-carousel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "一个集成了tab,carousel,loadmore的移动端vue组件",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magicianShiro/vue-tab-carousel.git"
+  },
   "keywords": [
     "tab",
     "carousel",
@@ -13,6 +17,9 @@
   ],
   "main": "./lib/vueTabCarousel.umd.js",
   "private": false,
+  "homepage": "https://github.com/magicianShiro/vue-tab-carousel#readme",
+  "author": "magicianShiro <navi@movom.cc>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve ./example/main.js",
     "build:lib": "vue-cli-service build --target lib --name vueTabCarousel --dest lib src/index.js",
