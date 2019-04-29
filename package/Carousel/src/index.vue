@@ -60,11 +60,11 @@ export default {
     calculated () {
       this.step = window.innerWidth
       let carouselListEl = this.$refs.carouselList
-      if (carouselListEl.childNodes.length === 0) return
-      this.min = -window.innerWidth * (carouselListEl.childNodes.length - 1)
-      carouselListEl.style.width = carouselListEl.childNodes.length * 100 + '%'
-      carouselListEl.childNodes.forEach(item => {
-        item.style.width = (100 / carouselListEl.childNodes.length) + '%'
+      if (carouselListEl.children.length === 0) return
+      this.min = -window.innerWidth * (carouselListEl.children.length - 1)
+      carouselListEl.style.width = carouselListEl.children.length * 100 + '%'
+      Array.from(carouselListEl.children).forEach(item => {
+        item.style.width = (100 / carouselListEl.children.length) + '%'
         item.style.display = "inline-block"
       })
     },

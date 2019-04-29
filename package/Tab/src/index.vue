@@ -18,12 +18,17 @@
             :key="index"
             @click="tabClick(index)"
             :class="{ 'navi-tab__item--active': index === activeIndex }" 
+            :style="{ color: index === activeIndex ? activeColor : defaultColor }"
             class="navi-tab__item">{{ tab }}</li>
         </ul>
+        <!-- <p
+          ref="line"
+          class="navi-tab__line"
+          :style="{ transition: transition }"></p> -->
         <p
           ref="line"
           class="navi-tab__line"
-          :style="{ transition: transition }"></p>
+          :style="lineStyle"></p>
         <!-- <p
           ref="line"
           class="navi-tab__line"></p> -->
@@ -50,6 +55,22 @@
         required: true,
         type: Array,
         default: () => []
+      },
+      lineWidth: {
+        type: [Number, String],
+        default: 60
+      },
+      lineColor: {
+        type: String,
+        default: '#f60'
+      },
+      activeColor: {
+        type: String,
+        default: '#f60'
+      },
+      defaultColor: {
+        type: String,
+        default: '#000'
       }
     },
     components: {
@@ -61,6 +82,15 @@
         min: 0,
         transition: null,
         touch: null
+      }
+    },
+    computed: {
+      lineStyle () {
+        return {
+          transition: this.transition,
+          backgroundColor: this.lineColor,
+          width: this.lineWidth.toString().replace('px', '') + 'px'
+        }
       }
     },
     watch: {
@@ -176,16 +206,16 @@
     text-align: center;
     line-height: 20px;
     &--active {
-      color: #f60;
+      // color: #f60;
     }
   }
   &__line {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 60px;
+    // width: 60px;
     height: 2px;
-    background-color: #f60;
+    // background-color: #f60;
     // transform: translateX(10px);
   }
 }

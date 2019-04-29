@@ -33,6 +33,10 @@ export default {
 |参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |tab-list|标签名|Array||true||
+|line-width|下划线长度|Number/String||false|60|
+|line-color|下划线颜色|String||false|#f60|
+|active-color|文字选中时的颜色|String||false|#f60|
+|default-color|文字未被选中时的颜色|String||false|#000|
 
 ### carousel组件
 > 注意: carousel组件的slot中的内容不能用一个父元素全部包起来, 这和实现方式有关
@@ -119,10 +123,13 @@ export default {
 </template>
 ```
 ### 属性
+> 关于tab的属性可以直接参照tab部分
+
 |参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
 |content-height|滑动视口的高度|Number||true|400|
 |skeleton|是否开启骨架屏占位(主要是为了懒加载)|Boolean|true/false|true|true|
+
 
 ### 子组件属性
 |参数|说明|类型|可选值|是否必填|默认值|

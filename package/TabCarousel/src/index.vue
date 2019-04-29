@@ -3,6 +3,10 @@
     <navi-tab
       :tab-list="tabList"
       :active-index="activeIndex"
+      :line-width="lineWidth"
+      :lineColor="lineColor"
+      :active-color="activeColor"
+      :default-color="defaultColor"
       @input="val => $emit('input', val)"/>
     <navi-carousel
       ref="naviCarousel"
@@ -33,6 +37,22 @@ export default {
     skeleton: {
       type: Boolean,
       default: true
+    },
+    lineWidth: {
+      type: [Number, String],
+      default: 60
+    },
+    lineColor: {
+      type: String,
+      default: '#f60'
+    },
+    activeColor: {
+      type: String,
+      default: '#f60'
+    },
+    defaultColor: {
+      type: String,
+      default: '#000'
     }
   },
   provide () {
