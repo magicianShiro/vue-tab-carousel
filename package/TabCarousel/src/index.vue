@@ -72,7 +72,7 @@ export default {
     activeIndex: {
       handler (val) {
         this.$nextTick(() => {
-          let component =this.$slots.default[val].child
+          let component = this.$slots.default.filter(v => v.elm.nodeType === 1)[val].child
           component.active()
         })
       },
@@ -91,7 +91,8 @@ export default {
   mounted () {
     this.$nextTick(() => {
       // let children = this.$refs.naviCarousel.$slots.default
-      let children = this.$slots.default
+      // 过滤掉文本节点
+      let children = this.$slots.default.filter(v => v.elm.nodeType === 1)
       let tags = children.map(v => v.child.tag)
       this.tabList = tags
     })
