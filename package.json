@@ -24,7 +24,10 @@
     "serve": "vue-cli-service serve ./example/main.js",
     "build:lib": "vue-cli-service build --target lib --name vueTabCarousel --dest lib src/index.js",
     "build": "vue-cli-service build ./example/main.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "patch": "npm version patch && git push origin master",
+    "minor": "npm version minor && git push origin master && git push origin --tags",
+    "major": "npm version major && git push origin master && git push origin --tags"
   },
   "dependencies": {
     "alloytouch": "^0.2.5",
