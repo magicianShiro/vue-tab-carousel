@@ -1,6 +1,6 @@
 {
   "name": "vue-tab-carousel",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "一个集成了tab,carousel,loadmore的移动端vue组件",
   "repository": {
     "type": "git",
