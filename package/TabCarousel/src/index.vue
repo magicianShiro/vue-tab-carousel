@@ -31,7 +31,8 @@ export default {
       default: 0
     },
     contentHeight: {
-      type: Number
+      type: Number,
+      required: true
     },
     skeleton: {
       type: Boolean,
