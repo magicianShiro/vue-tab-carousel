@@ -63,9 +63,11 @@ export default {
       if (carouselListEl.children.length === 0) return
       this.min = -window.innerWidth * (carouselListEl.children.length - 1)
       carouselListEl.style.width = carouselListEl.children.length * 100 + '%'
+      carouselListEl.style.display = 'flex'
       Array.from(carouselListEl.children).forEach(item => {
         item.style.width = (100 / carouselListEl.children.length) + '%'
-        item.style.display = "inline-block"
+        item.style.flex = 1
+        // item.style.display = "inline-block"
       })
     },
     initSuccess () {
