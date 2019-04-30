@@ -63,11 +63,12 @@ export default {
       if (carouselListEl.children.length === 0) return
       this.min = -window.innerWidth * (carouselListEl.children.length - 1)
       carouselListEl.style.width = carouselListEl.children.length * 100 + '%'
-      carouselListEl.style.display = 'flex'
+      // carouselListEl.style.display = 'flex'
       Array.from(carouselListEl.children).forEach(item => {
         item.style.width = (100 / carouselListEl.children.length) + '%'
-        item.style.flex = 1
+        // item.style.flex = 1
         // item.style.display = "inline-block"
+        item.style.float = "left"
       })
     },
     initSuccess () {
@@ -96,3 +97,15 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.navi-carousel__list {
+  &::after {
+    content: " ";
+    font-size: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+    height: 0;
+  }
+}
+</style>

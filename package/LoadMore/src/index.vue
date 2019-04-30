@@ -4,7 +4,7 @@
     class="navi-load-more"
     :style="{ height: actualHeight() + 'px' }">
     <div v-if="showLoading" class="loading-icon">
-      <img :src="require('@/assets/loading.svg')">
+      <img src="@/assets/loading.svg">
     </div>
     <navi-scroll
       ref="naviScroll"
@@ -20,7 +20,7 @@
           <div
             :class="{ 'arrow--up': release }"
             class="arrow">
-            <img :src="require('@/assets/arrow.svg')"><br />
+            <img src="@/assets/arrow.svg"><br />
           </div>
         </div>
         <slot />
