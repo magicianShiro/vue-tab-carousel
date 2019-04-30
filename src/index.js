@@ -4,6 +4,7 @@ import Carousel from '../package/Carousel'
 import LoadMore from '../package/LoadMore'
 import TabCarousel from '../package/TabCarousel'
 import TabCarouselItem from '../package/TabCarouselItem'
+import '../src/icons'
 import './assets/styles/index.scss'
 const components = [
   Scroll,

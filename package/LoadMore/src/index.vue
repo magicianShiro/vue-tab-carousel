@@ -4,7 +4,8 @@
     class="navi-load-more"
     :style="{ height: actualHeight() + 'px' }">
     <div v-if="showLoading" class="loading-icon">
-      <img src="@/assets/loading.svg">
+      <!-- <img src="@/assets/loading.svg"> -->
+      <svg-icon icon-class="loading" class-name="svg-loading"></svg-icon>
     </div>
     <navi-scroll
       ref="naviScroll"
@@ -20,7 +21,8 @@
           <div
             :class="{ 'arrow--up': release }"
             class="arrow">
-            <img src="@/assets/arrow.svg"><br />
+            <!-- <img src="@/assets/arrow.svg"><br /> -->
+            <svg-icon icon-class="arrow" class-name="svg-arrow"></svg-icon><br />
           </div>
         </div>
         <slot />
@@ -32,10 +34,12 @@
 
 <script>
   import NaviScroll from 'package/Scroll/index.js'
+  import SvgIcon from 'package/SvgIcon/index.vue'
   export default {
     name: 'NaviLoadMore',
     components: {
-      NaviScroll
+      NaviScroll,
+      SvgIcon
     },
     inject: {
       tabCarousel: { default: () => ({ height: 0 }) }
@@ -127,7 +131,12 @@
   background-color: #eee;
   overflow: hidden;
 }
-
+.svg-loading {
+  font-size: 32px;
+}
+.svg-arrow {
+  font-size: 20px;
+}
 .loading-icon {
   position: absolute;
   top: 0;
@@ -158,6 +167,10 @@
     transition: transform .4s ease;
     transform: rotate(180deg);
   }
+  .svg-arrow {
+    transition: transform .4s ease;
+    transform: rotate(180deg);
+  }
   &::after {
     content: "Pull to refresh";
     font-size: 14px;
@@ -166,6 +179,9 @@
   &--up {
     img {
       transform: rotate(0)
+    }
+    .svg-arrow {
+      transform: rotate(0);
     }
     &::after {
       content: "Release to refresh";
