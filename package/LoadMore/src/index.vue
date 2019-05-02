@@ -3,21 +3,23 @@
     ref="loadMore"
     class="navi-load-more"
     :style="{ height: actualHeight() + 'px' }">
-    <div v-if="showLoading" class="loading-icon">
+    <div v-if="showLoading && refresh === true" class="loading-icon">
       <!-- <img src="@/assets/loading.svg"> -->
       <svg-icon icon-class="loading" class-name="svg-loading"></svg-icon>
     </div>
+      <!-- :min="min" -->
+
     <navi-scroll
       ref="naviScroll"
       :touch="touch"
-      :min="min"
       :spring="false"
       :touchEndReturn="touchEndReturn"
+      :min="min"
       @change="change"
       @touchMove="touchMove"
       @touchEnd="touchEnd">
       <div ref="scrollContent" class="scroll-content">
-        <div v-if="showArrow" ref="arrow" class="pull">
+        <div v-if="refreshAllow && showArrow && refresh === true" ref="arrow" class="pull">
           <div
             :class="{ 'arrow--up': release }"
             class="arrow">
@@ -52,6 +54,14 @@
       refresh: {
         type: Boolean,
         default: false
+      },
+      refreshAllow: {
+        type: Boolean,
+        default: true
+      },
+      refreshSpring: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -68,11 +78,14 @@
     },
     mounted () {
       this.touch = this.$refs.loadMore
-      this.arrowHeight = this.$refs.arrow.offsetHeight
+      this.arrowHeight = this.$refs.arrow ? this.$refs.arrow.offsetHeight : 0
       this.resetMin()
     },
     methods: {
       change (v) {
+        if(v > 0 && !this.refreshSpring && !this.refresh){
+          this.$refs.naviScroll.to(0, 0)
+        }
         if (v <= this.min + 5) {
           this.$emit('loadMore')
         }
@@ -128,7 +141,7 @@
 <style lang="scss" scoped>
 .navi-load-more {
   position: relative;
-  background-color: #eee;
+  // background-color: #eee;
   overflow: hidden;
 }
 .svg-loading {

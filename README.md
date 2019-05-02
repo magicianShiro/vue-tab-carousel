@@ -95,6 +95,8 @@ export default {
 |--|--|--|--|--|--|
 |height|滑动视口的高度|Number||true|400|
 |refresh|是否开启下拉刷新|Boolean|true/false|false|false|
+|refresh-allow|下拉刷新是否出现箭头显示|Boolean|true/false|false|true|
+|refresh-spring|关闭下拉刷新时是否开启回弹效果|Boolean|true/false|false|true|
 
 ### 事件
 |事件名称|说明|回调参数|

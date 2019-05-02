@@ -1,4 +1,6 @@
 <template>
+    <!-- refresh -->
+
   <navi-load-more
     ref="loadMore"
     :height="400"
