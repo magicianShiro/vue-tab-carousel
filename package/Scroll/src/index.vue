@@ -129,6 +129,12 @@ export default {
 </script>
 
 <style>
+.wrapper {
+  height: 100%;
+}
+.scroller {
+  height: 100%;
+}
 #wrapper {
   /* position: absolute;
   z-index: 1;
@@ -144,6 +150,7 @@ export default {
   z-index: 1;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   width: 100%;
+  height: 100%;
   transform: translateZ(0);
   user-select: none;
   text-size-adjust: none;

@@ -1,6 +1,7 @@
 <template>
   <div class="navi-tab-carousel">
     <navi-tab
+      ref="naviTab"
       :tab-list="tabList"
       :active-index="activeIndex"
       :line-width="lineWidth"
@@ -10,6 +11,7 @@
       @input="val => $emit('input', val)"/>
     <navi-carousel
       ref="naviCarousel"
+      :style="{ height: wrapHeight() }"
       :active-index="activeIndex"
       @input="val => $emit('input', val)">
       <slot />
@@ -31,7 +33,7 @@ export default {
       default: 0
     },
     contentHeight: {
-      type: Number,
+      type: [Number, String],
       required: true
     },
     skeleton: {
@@ -88,6 +90,20 @@ export default {
       }
     }
   },
+  methods: {
+    wrapHeight () {
+      let height = this.contentHeight
+      let tabComponent = this.$refs.naviTab
+      if (tabComponent && typeof height === 'string' && height.indexOf('%') !== -1) {
+        let tabEl = this.$refs.naviTab.$el
+        let tabHeight = tabEl.offsetHeight
+        return  `calc(${height} - ${tabHeight + 'px'})`
+      } else {
+        return ''
+      }
+      
+    }
+  },
   mounted () {
     this.$nextTick(() => {
       // let children = this.$refs.naviCarousel.$slots.default
@@ -99,3 +115,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.navi-tab-carousel {
+  height: 100%;
+}
+</style>

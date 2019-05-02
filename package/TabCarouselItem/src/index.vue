@@ -42,6 +42,7 @@
 
 <style lang="scss" scoped>
 .navi-tab-carousel-item {
-  display: inline-block;
+  // display: inline-block;
+  height: 100%;;
 }
 </style>

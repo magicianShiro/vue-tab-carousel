@@ -129,7 +129,7 @@ export default {
 
 |参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
-|content-height|滑动视口的高度|Number||true|400|
+|content-height|滑动视口的高度, **注意：当使用100%时，其高度根据他的父元素来计算, 且内容区域是其父元素高度减去tab栏高度后得出的值**|Number/String|100%/100vh/100/100px|true|400|
 |skeleton|是否开启骨架屏占位(主要是为了懒加载)|Boolean|true/false|true|true|
 
 
