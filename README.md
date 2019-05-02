@@ -93,7 +93,7 @@ export default {
 ### 属性
 |参数|说明|类型|可选值|是否必填|默认值|
 |--|--|--|--|--|--|
-|height|滑动视口的高度|Number||true|400|
+|height|滑动视口的高度, **注意：当使用100%时，其高度根据他的父元素来计算**|Number/String|100%/100vh/100/100px|true|400|
 |refresh|是否开启下拉刷新|Boolean|true/false|false|false|
 |refresh-allow|下拉刷新是否出现箭头显示|Boolean|true/false|false|true|
 |refresh-spring|关闭下拉刷新时是否开启回弹效果|Boolean|true/false|false|true|

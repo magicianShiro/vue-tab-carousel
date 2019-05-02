@@ -1,8 +1,9 @@
 <template>
+<!-- :style="{ height: actualHeight() + 'px' }" -->
   <div
     ref="loadMore"
     class="navi-load-more"
-    :style="{ height: actualHeight() + 'px' }">
+    :style="{ height: wrapHeight() }">
     <div v-if="showLoading && refresh === true" class="loading-icon">
       <!-- <img src="@/assets/loading.svg"> -->
       <svg-icon icon-class="loading" class-name="svg-loading"></svg-icon>
@@ -48,7 +49,7 @@
     },
     props: {
       height: {
-        type: Number,
+        type: [Number, String],
         default: 400
       },
       refresh: {
@@ -66,6 +67,7 @@
     },
     data () {
       return {
+        tabCarouselHeight: 0,
         min: 0,
         touch: null,
         touchEndReturn: true, // 控制scroll的touchEnd的return值
@@ -80,6 +82,9 @@
       this.touch = this.$refs.loadMore
       this.arrowHeight = this.$refs.arrow ? this.$refs.arrow.offsetHeight : 0
       this.resetMin()
+    },
+    computed: {
+      
     },
     methods: {
       change (v) {
@@ -99,8 +104,10 @@
               this.showArrow = true
             }, 300)
             this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.actualHeight()
+            // this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height)
           } else {
             this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.actualHeight() + this.arrowHeight
+            // this.min = -1 * parseInt(getComputedStyle(this.$refs.scrollContent).height) + this.arrowHeight
             if (this.min > 0) this.min = 0
             // console.log(parseInt(getComputedStyle(this.$refs.scrollContent).height))
             // if (this.min < this.actualHeight) this.min = -this.actualHeight + 1
@@ -131,8 +138,31 @@
           this.touchEndReturn = true
         }
       },
+      wrapHeight () {
+        let height = this.tabCarousel.height ? this.tabCarousel.height : this.height
+        if (typeof height === 'number') return this.height + 'px'
+        else if (typeof height === 'string') {
+          if (height.indexOf('%') !== -1 || height.indexOf('vh') !== -1) {
+            return height
+          } else {
+            return height.replace('px', '') + 'px'
+          }
+        }
+        return '0px'
+      },
       actualHeight () {
-        return this.tabCarousel.height ? this.tabCarousel.height : this.height
+        if (this.tabCarouselHeight) return this.tabCarouselHeight
+        let height = this.tabCarousel.height ? this.tabCarousel.height : this.height
+        if (typeof height === 'string') {
+          if (height.indexOf('%') !== -1 || height.indexOf('vh') !== -1) {
+            height = parseInt(getComputedStyle(this.$refs.loadMore).height)
+          } else {
+            return parseInt(height)
+          }
+        }
+        this.tabCarouselHeight = height
+        return height
+        // return this.tabCarousel.height ? this.tabCarousel.height : this.height
       }
     }
   }
