@@ -99,6 +99,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .navi-carousel__list {
+  height: 100%;
   &::after {
     content: " ";
     font-size: 0;
