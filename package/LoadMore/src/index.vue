@@ -75,7 +75,8 @@
         arrowHeight: 0, // 箭头区域的高度
         showLoading: false,
         showArrow: true,
-        release: false
+        release: false,
+        cacheHeight: null // 计算出的最终的视图的高度
       }
     },
     mounted () {
@@ -139,16 +140,19 @@
         }
       },
       wrapHeight () {
+        if (this.cacheHeight) return this.cacheHeight
         let height = this.tabCarousel.height ? this.tabCarousel.height : this.height
-        if (typeof height === 'number') return this.height + 'px'
+        let result = '0px'
+        if (typeof height === 'number') result = height + 'px'
         else if (typeof height === 'string') {
           if (height.indexOf('%') !== -1 || height.indexOf('vh') !== -1) {
-            return height
+            result =  height
           } else {
-            return height.replace('px', '') + 'px'
+            result = height.replace('px', '') + 'px'
           }
         }
-        return '0px'
+        this.cacheHeight = result
+        return result
       },
       actualHeight () {
         if (this.tabCarouselHeight) return this.tabCarouselHeight

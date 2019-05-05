@@ -87,21 +87,23 @@ export default {
       active: 0,
       props: {
         height: this.contentHeight
-      }
+      },
+      cacheHeight: null
     }
   },
   methods: {
     wrapHeight () {
+      if (this.cacheHeight) return this.cacheHeight
       let height = this.contentHeight
+      let result = ''
       let tabComponent = this.$refs.naviTab
       if (tabComponent && typeof height === 'string' && height.indexOf('%') !== -1) {
         let tabEl = this.$refs.naviTab.$el
         let tabHeight = tabEl.offsetHeight
-        return  `calc(${height} - ${tabHeight + 'px'})`
-      } else {
-        return ''
+        result = `calc(${height} - ${tabHeight + 'px'})`
       }
-      
+      this.cacheHeight = result
+      return result
     }
   },
   mounted () {
